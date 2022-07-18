@@ -14,8 +14,17 @@ const navItems = [
 
 const Navbar = () => {
   return (
-    <Box sx={{ display: "flex" }}>
-      <AppBar>
+    <Box
+      sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+    >
+      <AppBar
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        style={{ background: "#141414" }}
+      >
         <Toolbar className="navbar">
           <Box
             sx={{
