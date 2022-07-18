@@ -7,6 +7,7 @@ const initialState = {
 };
 
 // Membuat extra action untuk fetch data
+// Now playing
 export const movieAsync = createAsyncThunk("movie/fetchMovie", async () => {
   const response = await axios.get(
     `https://api.themoviedb.org/3/movie/now_playing?api_key=b05b0bef835101289e13d0c705ae7c35`

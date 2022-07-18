@@ -2,6 +2,43 @@
 /* Styling untuk setiap page */
 /* ========================= */
 
+/* Navbar */
+.navbar{
+  height: 82px;
+  background-color: rgba(20, 20, 20, 1);
+  padding-top: 2px;
+  padding-bottom: 2px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar img{
+  width: 2.5%;
+  height: auto;
+}
+
+.nav-active{
+  font: 500 1em;
+  color: aquamarine;
+  margin: 0 4px 0 4px;
+  text-decoration: none;
+}
+
+.nav-inactive{
+  font: bold 1em;
+  color: white;
+  margin: 0 4px 0 4px;
+  text-decoration: none;
+}
+
+/* Container */
+.root-container{
+  width: 100%;
+  min-height: 100%;
+  background-color: #201F1F;
+}
 
 .base-container{
   width: 100%;
@@ -13,6 +50,8 @@
   align-items: center;
 }
 
+
+/* Login */
 .login-form{
   width:40%;
   display: flex;
