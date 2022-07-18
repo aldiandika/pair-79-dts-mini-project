@@ -3,13 +3,16 @@ import axios from "axios";
 
 const initialState = {
   loading: false,
-  movies: "movies",
+  movies: [],
 };
 
+// Membuat extra action untuk fetch data
 export const movieAsync = createAsyncThunk("movie/fetchMovie", async () => {
-  const response = await axios.get(`https://reqres.in/api/users/`);
-  console.log(response.data);
-  return response.data.data;
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/now_playing?api_key=b05b0bef835101289e13d0c705ae7c35`
+  );
+  console.log(response.data.results);
+  return response.data;
 });
 
 const MovieSlice = createSlice({
@@ -18,7 +21,7 @@ const MovieSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(movieAsync.fulfilled, (state, action) => {
-        state.movies = action.payload;
+        state.movies = action.payload.results;
       })
       .addCase(movieAsync.pending, (state, action) => {
         console.log("loading");
