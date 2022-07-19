@@ -7,9 +7,9 @@ import ImageLogo from "../assets/logo/logo.png";
 
 const navItems = [
   { text: "Home", link: "/" },
-  { text: "Series", link: "/series" },
-  { text: "Movies", link: "/movies" },
-  { text: "New and Popular", link: "/popular" },
+  { text: "Register", link: "/register" },
+  { text: "Login", link: "/login" },
+  { text: "Logout", link: "/logout" },
 ];
 
 const Navbar = () => {
