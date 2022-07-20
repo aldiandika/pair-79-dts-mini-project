@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import FooterComponent from "../component/FooterComponent";
 import MovieCard from "../component/MovieCard";
 import MovieCardLoading from "../component/MovieCardLoading";
 import Navbar from "../component/Navbar";
@@ -71,7 +72,50 @@ const HomePage = () => {
           )}
 
           {/* List untuk Top Rated Movies */}
+          <div className="category-title">Top Rated</div>
+          {isLoading ? (
+            <div className="list-movie-container">
+              {movLoading.map((item, index) => (
+                <div key={item}>
+                  <MovieCardLoading />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="list-movie-container">
+              {topMovies.map((item, index) => (
+                <div key={index}>
+                  <MovieCard movie={item} />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* List untuk Top Rated Movies */}
+          <div className="category-title">Top Rated</div>
+          {isLoading ? (
+            <div className="list-movie-container">
+              {movLoading.map((item, index) => (
+                <div key={item}>
+                  <MovieCardLoading />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="list-movie-container">
+              {topMovies.map((item, index) => (
+                <div key={index}>
+                  <MovieCard movie={item} />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* List untuk Top Rated Movies */}
         </div>
+
+        {/* Footer */}
+        <FooterComponent />
       </div>
     </>
   );
