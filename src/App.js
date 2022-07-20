@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ProtectedComponent from "./component/ProtectedComponent";
 import DetailMoviePage from "./container/detail-movie-page";
 import HomePage from "./container/home-page";
 import LoginPage from "./container/login-page";
@@ -11,7 +12,14 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
-        <Route path="detail" element={<DetailMoviePage />} />
+        <Route
+          path="detail"
+          element={
+            <ProtectedComponent>
+              <DetailMoviePage />
+            </ProtectedComponent>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
