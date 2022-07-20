@@ -1,11 +1,19 @@
 import { Box, Typography, Button } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import LoginPic from "../assets/ProfilePicture.png";
 import Rectangle from "../assets/Rectangle33.png";
+import {
+  auth,
+  loginWithEmailAndPassword,
+  registerWithEmailAndPassword,
+} from "../authentication/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const LoginOrRegister = ({ loginOrRegister }) => {
   const navigate = useNavigate();
+
+  const [user, isLoading, error] = useAuthState(auth);
 
   const [credential, setCredential] = useState({
     email: "",
@@ -26,8 +34,13 @@ const LoginOrRegister = ({ loginOrRegister }) => {
     });
   };
 
-  const loginHandler = () => {};
-  const registerHandler = () => {};
+  const loginHandler = () => {
+    loginWithEmailAndPassword(credential.email, credential.password);
+  };
+
+  const registerHandler = () => {
+    registerWithEmailAndPassword(credential.email, credential.password);
+  };
 
   const buttonLoginOrRegisterOnClickHandler = () => {
     if (loginOrRegister === "login") {
@@ -36,6 +49,16 @@ const LoginOrRegister = ({ loginOrRegister }) => {
       registerHandler();
     }
   };
+
+  useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+
+    if (user) {
+      navigate("/detail");
+    }
+  }, [user, isLoading, navigate]);
 
   return (
     <>

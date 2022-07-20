@@ -2,17 +2,30 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import * as React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import ImageLogo from "../assets/logo/logo.png";
-
-const navItems = [
-  { text: "Home", link: "/" },
-  { text: "Register", link: "/register" },
-  { text: "Login", link: "/login" },
-  { text: "Logout", link: "/logout" },
-];
+import { auth, logout } from "../authentication/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useState, useEffect } from "react";
 
 const Navbar = () => {
+  const [user] = useAuthState(auth);
+  const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, [user]);
+
+  const handleLogoutButton = async () => {
+    await logout();
+    navigate("/");
+  };
+
   return (
     <Box
       sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
@@ -47,17 +60,45 @@ const Navbar = () => {
               alignItems: "space-between",
             }}
           >
-            {navItems.map((item) => (
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "nav-active" : "nav-inactive"
+              }
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              to="/register"
+              className={({ isActive }) =>
+                isActive ? "nav-active" : "nav-inactive"
+              }
+            >
+              Register
+            </NavLink>
+
+            {isLogin ? (
+              <a
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  color: "white",
+                }}
+                onClick={handleLogoutButton}
+              >
+                Logout
+              </a>
+            ) : (
               <NavLink
-                to={item.link}
-                key={item.text}
+                to="/login"
                 className={({ isActive }) =>
                   isActive ? "nav-active" : "nav-inactive"
                 }
               >
-                {item.text}
+                Login
               </NavLink>
-            ))}
+            )}
           </Box>
         </Toolbar>
       </AppBar>

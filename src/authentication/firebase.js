@@ -66,3 +66,32 @@ const loginWithEmailAndPassword = async (email, password) => {
     console.log("error message auth", err.message);
   }
 };
+
+// Fungsi untuk logout
+const logout = async () => {
+  try {
+    await signOut(auth);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Fungsi untuk reset password
+const resetPassword = async (email) => {
+  // Dokumentasi: https://firebase.google.com/docs/reference/js/auth.md#sendpasswordresetemail
+  try {
+    await sendPasswordResetEmail(auth, email);
+
+    console.log("Password reset sudah dikirimkan");
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export {
+  auth,
+  loginWithEmailAndPassword,
+  registerWithEmailAndPassword,
+  resetPassword,
+  logout,
+};
