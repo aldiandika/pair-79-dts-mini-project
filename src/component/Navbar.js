@@ -9,7 +9,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useState, useEffect } from "react";
 
 const Navbar = () => {
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
 
@@ -69,36 +69,45 @@ const Navbar = () => {
               Home
             </NavLink>
 
-            <NavLink
-              to="/register"
-              className={({ isActive }) =>
-                isActive ? "nav-active" : "nav-inactive"
-              }
-            >
-              Register
-            </NavLink>
-
-            {isLogin ? (
-              <a
-                style={{
-                  cursor: "pointer",
-                  textDecoration: "none",
-                  color: "white",
-                }}
-                onClick={handleLogoutButton}
-              >
-                Logout
-              </a>
-            ) : (
-              <NavLink
-                to="/login"
-                className={({ isActive }) =>
-                  isActive ? "nav-active" : "nav-inactive"
-                }
-              >
-                Login
-              </NavLink>
-            )}
+            {!loading &&
+              (isLogin ? (
+                <button
+                  style={{
+                    cursor: "pointer",
+                    color: "white",
+                    backgroundColor: "#141414",
+                    borderColor: "white",
+                    borderRadius: "12px",
+                    paddingLeft: "8px",
+                    paddingRight: "8px",
+                    paddingTop: "4px",
+                    paddingBottom: "4px",
+                    marginLeft: "12px",
+                  }}
+                  onClick={handleLogoutButton}
+                >
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <NavLink
+                    to="/register"
+                    className={({ isActive }) =>
+                      isActive ? "nav-active" : "nav-inactive"
+                    }
+                  >
+                    Register
+                  </NavLink>
+                  <NavLink
+                    to="/login"
+                    className={({ isActive }) =>
+                      isActive ? "nav-active" : "nav-inactive"
+                    }
+                  >
+                    Login
+                  </NavLink>
+                </>
+              ))}
           </Box>
         </Toolbar>
       </AppBar>

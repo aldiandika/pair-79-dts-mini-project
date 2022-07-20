@@ -13,7 +13,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 const LoginOrRegister = ({ loginOrRegister }) => {
   const navigate = useNavigate();
 
-  const [user, isLoading, error] = useAuthState(auth);
+  const [user, isLoading] = useAuthState(auth);
 
   const [credential, setCredential] = useState({
     email: "",
@@ -56,7 +56,7 @@ const LoginOrRegister = ({ loginOrRegister }) => {
     }
 
     if (user) {
-      navigate("/detail");
+      navigate("/");
     }
   }, [user, isLoading, navigate]);
 
