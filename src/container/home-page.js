@@ -70,48 +70,6 @@ const HomePage = () => {
               ))}
             </div>
           )}
-
-          {/* List untuk Top Rated Movies */}
-          <div className="category-title">Top Rated</div>
-          {isLoading ? (
-            <div className="list-movie-container">
-              {movLoading.map((item, index) => (
-                <div key={item}>
-                  <MovieCardLoading />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="list-movie-container">
-              {topMovies.map((item, index) => (
-                <div key={index}>
-                  <MovieCard movie={item} />
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* List untuk Top Rated Movies */}
-          <div className="category-title">Top Rated</div>
-          {isLoading ? (
-            <div className="list-movie-container">
-              {movLoading.map((item, index) => (
-                <div key={item}>
-                  <MovieCardLoading />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="list-movie-container">
-              {topMovies.map((item, index) => (
-                <div key={index}>
-                  <MovieCard movie={item} />
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* List untuk Top Rated Movies */}
         </div>
 
         {/* Footer */}

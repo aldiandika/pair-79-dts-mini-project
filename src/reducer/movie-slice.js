@@ -5,6 +5,7 @@ const initialState = {
   loading: true,
   movies: [],
   topMovies: [],
+  movieDetail: {},
 };
 
 // Membuat extra action untuk fetch data
@@ -23,7 +24,19 @@ export const topMovieAsync = createAsyncThunk(
     const response = await axios.get(
       `https://api.themoviedb.org/3/movie/top_rated?api_key=b05b0bef835101289e13d0c705ae7c35`
     );
-    console.log(response.data.results);
+    // console.log(response.data.results);
+    return response.data;
+  }
+);
+
+// Fetch detail movie berdasarkan movie id
+export const fetchMovieDetail = createAsyncThunk(
+  "movie/fetchMovieDetail",
+  async (id) => {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=b05b0bef835101289e13d0c705ae7c35`
+    );
+    // console.log(response.data);
     return response.data;
   }
 );
@@ -54,6 +67,17 @@ const MovieSlice = createSlice({
       })
       .addCase(topMovieAsync.rejected, (state, action) => {
         console.log("fail to get popular movies");
+      })
+      .addCase(fetchMovieDetail.fulfilled, (state, action) => {
+        state.movieDetail = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchMovieDetail.pending, (state, action) => {
+        console.log("loading");
+        state.loading = true;
+      })
+      .addCase(fetchMovieDetail.rejected, (state, action) => {
+        console.log("fail to get popular movies");
       });
   },
 });
@@ -62,5 +86,6 @@ const MovieSlice = createSlice({
 export const selectMovie = (state) => state.movie.movies;
 export const selectTopMovie = (state) => state.movie.topMovies;
 export const selectLoadingState = (state) => state.movie.loading;
+export const selectMovieDetailState = (state) => state.movie.movieDetail;
 
 export default MovieSlice.reducer;
